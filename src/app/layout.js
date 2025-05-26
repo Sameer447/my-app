@@ -17,11 +17,11 @@ export const metadata = {
   openGraph: {
     title: "Viral Video",
     description: "",
-    url: "https://my-app-five-ruby.vercel.app/",
+    url: "https://my-app-crih.vercel.app/",
     siteName: "My Site",
     images: [
       {
-        url: "https://my-app-five-ruby.vercel.app/preview.jpeg",
+        url: "https://my-app-crih.vercel.app/preview.jpeg",
         width: 1200,
         height: 630,
         alt: "Preview Image",
