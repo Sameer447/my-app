@@ -21,7 +21,7 @@ export const metadata = {
     siteName: "My Site",
     images: [
       {
-        url: "https://my-app-five-ruby.vercel.app/preview.jpg",
+        url: "https://my-app-five-ruby.vercel.app/preview.jpeg",
         width: 1200,
         height: 630,
         alt: "Preview Image",
